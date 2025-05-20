@@ -7,7 +7,7 @@ export default function App() {
   }
 
   const groupMembers = [
-    { name: "Joy WOng", github_repo: "joywong1228", group_no: "3" },
+    { name: "Joy Wong", github_repo: "joywong1228", group_no: "3" },
     { name: "Sheeba Hussaini", github_repo: "s-hussaini", group_no: "3" },
     { name: "Ahmad Fakhry", github_repo: "syruphie", group_no: "3" }
   ];
