@@ -23,7 +23,7 @@ export default function App() {
       <Pressable onPress={handlePress} >
         <Text style= {styles.button}>Press Me</Text>
       </Pressable>
-<FruitList />
+      <FruitList />
       <StatusBar style="auto" />
     </View>
   );
