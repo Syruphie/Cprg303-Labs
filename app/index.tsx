@@ -14,6 +14,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Group Members:</Text>
       {groupMembers.map((member, index) => (
         <Text key={index}>{member.name}</Text>
       ))}
