@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
+import FruitList from '../components/FruitList';
 
 export default function App() {
   const handlePress = () => {
@@ -22,7 +23,7 @@ export default function App() {
       <Pressable onPress={handlePress} >
         <Text style= {styles.button}>Press Me</Text>
       </Pressable>
-
+<FruitList />
       <StatusBar style="auto" />
     </View>
   );
