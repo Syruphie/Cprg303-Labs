@@ -34,16 +34,11 @@ export default function App() {
         <Text style={{ fontSize: 18, color: "green" }}>Go to Lab 3</Text>
       </Pressable>
 
-      <StatusBar style="auto" />
-    </View>
-  );
-
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-
-      <Pressable onPress={handlePress}>
-        <Text style={styles.button}>Press Me</Text>
+      <Pressable
+        onPress={() => router.push("/lab4")}
+        style={{ marginVertical: 10 }}
+      >
+        <Text style={styles.labButton}>Go to Lab 4: Vacation Destinations</Text>
       </Pressable>
 
       <StatusBar style="auto" />
@@ -65,5 +60,12 @@ const styles = StyleSheet.create({
     borderColor: "black",
     padding: 10,
     borderRadius: 5,
+  },
+
+  labButton: {
+    fontSize: 18,
+    color: "blue",
+    fontWeight: "600",
+    textDecorationLine: "underline",
   },
 });
