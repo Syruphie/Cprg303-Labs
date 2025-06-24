@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,8 +8,10 @@ import {
   Image,
   ActivityIndicator,
   Alert,
-} from 'react-native';
-import vacationDestinations, { VacationDestination } from '../lib/vacationsDestinations';
+} from "react-native";
+import vacationDestinations, {
+  VacationDestination,
+} from "../../lib/vacationsDestinations";
 
 // Interface for Wikipedia API response
 interface WikipediaResponse {
@@ -23,26 +25,32 @@ interface WikipediaResponse {
 }
 
 const Lab4: React.FC = () => {
-  const [selectedDestination, setSelectedDestination] = useState<number | null>(null);
-  const [wikipediaData, setWikipediaData] = useState<WikipediaResponse | null>(null);
+  const [selectedDestination, setSelectedDestination] = useState<number | null>(
+    null
+  );
+  const [wikipediaData, setWikipediaData] = useState<WikipediaResponse | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchWikipediaData = async (city: string) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(city)}`
+        `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
+          city
+        )}`
       );
-      
+
       if (!response.ok) {
-        throw new Error('Failed to fetch Wikipedia data');
+        throw new Error("Failed to fetch Wikipedia data");
       }
-      
+
       const data: WikipediaResponse = await response.json();
       setWikipediaData(data);
     } catch (error) {
-      console.error('Error fetching Wikipedia data:', error);
-      Alert.alert('Error', 'Failed to load city information');
+      console.error("Error fetching Wikipedia data:", error);
+      Alert.alert("Error", "Failed to load city information");
       setWikipediaData(null);
     } finally {
       setLoading(false);
@@ -63,17 +71,20 @@ const Lab4: React.FC = () => {
 
   const renderDestination = (destination: VacationDestination) => {
     const isSelected = selectedDestination === destination.id;
-    
+
     return (
       <View key={destination.id} style={styles.destinationContainer}>
         <TouchableOpacity
-          style={[styles.destinationHeader, isSelected && styles.selectedHeader]}
+          style={[
+            styles.destinationHeader,
+            isSelected && styles.selectedHeader,
+          ]}
           onPress={() => handleDestinationPress(destination)}
         >
           <Text style={styles.locationText}>{destination.location}</Text>
-          <Text style={styles.chevron}>{isSelected ? '▼' : '▶'}</Text>
+          <Text style={styles.chevron}>{isSelected ? "▼" : "▶"}</Text>
         </TouchableOpacity>
-        
+
         {isSelected && (
           <View style={styles.detailsContainer}>
             <View style={styles.basicDetails}>
@@ -82,11 +93,13 @@ const Lab4: React.FC = () => {
                 Average Temperature: {destination.average_yearly_temperature}
               </Text>
             </View>
-            
+
             {loading ? (
               <View style={styles.loadingContainer}>
                 <ActivityIndicator size="large" color="#007AFF" />
-                <Text style={styles.loadingText}>Loading city information...</Text>
+                <Text style={styles.loadingText}>
+                  Loading city information...
+                </Text>
               </View>
             ) : wikipediaData ? (
               <View style={styles.wikipediaContainer}>
@@ -98,7 +111,9 @@ const Lab4: React.FC = () => {
                   />
                 )}
                 <Text style={styles.wikipediaTitle}>{wikipediaData.title}</Text>
-                <Text style={styles.wikipediaExtract}>{wikipediaData.extract}</Text>
+                <Text style={styles.wikipediaExtract}>
+                  {wikipediaData.extract}
+                </Text>
               </View>
             ) : null}
           </View>
@@ -111,7 +126,7 @@ const Lab4: React.FC = () => {
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Vacation Destinations</Text>
       <Text style={styles.subtitle}>Tap on a destination to see details</Text>
-      
+
       {vacationDestinations.map(renderDestination)}
     </ScrollView>
   );
@@ -120,27 +135,27 @@ const Lab4: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
     padding: 16,
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginBottom: 8,
-    color: '#333',
+    color: "#333",
   },
   subtitle: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 24,
-    color: '#666',
+    color: "#666",
   },
   destinationContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 12,
     marginBottom: 12,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -150,28 +165,28 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   destinationHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 16,
     borderRadius: 12,
   },
   selectedHeader: {
-    backgroundColor: '#e3f2fd',
+    backgroundColor: "#e3f2fd",
   },
   locationText: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
+    fontWeight: "600",
+    color: "#333",
   },
   chevron: {
     fontSize: 16,
-    color: '#007AFF',
-    fontWeight: 'bold',
+    color: "#007AFF",
+    fontWeight: "bold",
   },
   detailsContainer: {
     borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
+    borderTopColor: "#e0e0e0",
     padding: 16,
   },
   basicDetails: {
@@ -180,39 +195,39 @@ const styles = StyleSheet.create({
   detailText: {
     fontSize: 16,
     marginBottom: 8,
-    color: '#555',
+    color: "#555",
   },
   loadingContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 20,
   },
   loadingText: {
     marginTop: 12,
     fontSize: 16,
-    color: '#666',
+    color: "#666",
   },
   wikipediaContainer: {
     borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
+    borderTopColor: "#e0e0e0",
     paddingTop: 16,
   },
   cityImage: {
-    width: '100%',
+    width: "100%",
     height: 200,
     borderRadius: 8,
     marginBottom: 12,
   },
   wikipediaTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 12,
-    color: '#333',
+    color: "#333",
   },
   wikipediaExtract: {
     fontSize: 14,
     lineHeight: 20,
-    color: '#555',
-    textAlign: 'justify',
+    color: "#555",
+    textAlign: "justify",
   },
 });
 
