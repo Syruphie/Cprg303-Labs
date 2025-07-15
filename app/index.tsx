@@ -54,6 +54,12 @@ export default function App() {
         >
           <Text style={styles.routeText}>Go to Lab 4</Text>
         </Pressable>
+        <Pressable
+          onPress={() => router.push("/lab5/lab5")}
+          style={styles.routeButton}
+        >
+          <Text style={styles.routeText}>Go to Lab 5</Text>
+        </Pressable>
       </View>
 
       <StatusBar style="auto" />
